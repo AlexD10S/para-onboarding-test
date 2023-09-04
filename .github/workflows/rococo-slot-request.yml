@@ -30,7 +30,8 @@ jobs:
       - name: Run CLI App
         id: onboard
         working-directory: cli
-         env:
+        run: cargo run "$PARA_ID" "$MANAGER_ACCOUNT" -g "$GENESIS" -v "$WASM"
+        env:
           SUDO_ACCOUNT: ${{ secrets.SUDO_ACCOUNT }}
           SEED: ${{ secrets.SEED }}
           FAUCET_ADDRESS: ${{ secrets.FAUCET_ADDRESS }}
@@ -39,7 +40,6 @@ jobs:
           MANAGER_ACCOUNT: ${{ steps.issue-parser.outputs.issueparser_manager_account }}
           GENESIS: ${{ steps.issue-parser.outputs.issueparser_genesis }}
           WASM: ${{ steps.issue-parser.outputs.issueparser_wasm }}
-        run: cargo run "$PARA_ID" "$MANAGER_ACCOUNT" -g "$GENESIS" -v "$WASM"
        
       - name: Close issue
         if: steps.onboard.outcome == 'success'
