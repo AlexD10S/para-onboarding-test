@@ -141,7 +141,7 @@ pub async fn sign_and_send_proxy_call(
         call,
     );
 
-    api.tx()
+    let a = api.tx()
         .sign_and_submit_then_watch_default(&utx, &get_signer())
         .await?
         .wait_for_in_block()
@@ -149,6 +149,7 @@ pub async fn sign_and_send_proxy_call(
         .wait_for_success()
         .await?
         .has::<rococo::sudo::events::Sudid>()?;
+    println!("here: {:?}", a);
 
     Ok(())
 }
