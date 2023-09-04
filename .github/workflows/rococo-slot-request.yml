@@ -31,7 +31,7 @@ jobs:
         id: onboard
         working-directory: cli
         # run: cargo run ${{ $PARA_ID }} ${{ $MANAGER_ACCOUNT }} -g ${{ $GENESIS }} -v ${{ $WASM }}
-        run: echo $PARA_ID
+        run: echo ${PARA_ID}
         env:
           SUDO_ACCOUNT: ${{ secrets.SUDO_ACCOUNT }}
           SEED: ${{ secrets.SEED }}
