@@ -30,8 +30,10 @@ jobs:
       - name: Run CLI App
         id: onboard
         working-directory: cli
+        run: echo ${{ steps.issue-parser.outputs.issueparser_para_id }} > PARA_ID
+        run: cargo run $PARA_ID
         # run: cargo run ${{ $PARA_ID }} ${{ $MANAGER_ACCOUNT }} -g ${{ $GENESIS }} -v ${{ $WASM }}
-        run: echo ${{env.PARA_ID}}
+        
         env:
           SUDO_ACCOUNT: ${{ secrets.SUDO_ACCOUNT }}
           SEED: ${{ secrets.SEED }}
