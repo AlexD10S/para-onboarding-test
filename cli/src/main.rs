@@ -36,7 +36,13 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args = Cli::parse();
 
     let para_id: u32 = args.para_id.parse::<u32>().unwrap();
+    println!(
+        "ParaId: {}", para_id
+    );
     let manager_account: AccountId32 = args.manager_account.parse().unwrap();
+    println!(
+        "manager account: {}", manager_account
+    );
 
     let rococo_api = rococo_connection().await;
 
