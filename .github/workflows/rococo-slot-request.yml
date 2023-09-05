@@ -30,9 +30,7 @@ jobs:
       - name: Run CLI App
         id: onboard
         working-directory: cli
-        run: echo $PARA_ID
-        # run: cargo run $para_id $manager_account -g $genesis -v $wasm
-        
+        run: echo "$PARA_ID"
         env:
           SUDO_ACCOUNT: ${{ secrets.SUDO_ACCOUNT }}
           SEED: ${{ secrets.SEED }}
