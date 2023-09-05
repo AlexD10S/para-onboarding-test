@@ -26,11 +26,12 @@ jobs:
         id: issue-parser
         with:
           template-path: .github/ISSUE_TEMPLATE/rococo.yaml # optional but recommended
+          
+      - run: echo ${{ steps.issue-parser.outputs.issueparser_para_id }} > PARA_ID
 
       - name: Run CLI App
         id: onboard
         working-directory: cli
-        run: echo ${{ steps.issue-parser.outputs.issueparser_para_id }} > PARA_ID
         run: cargo run $PARA_ID
         # run: cargo run ${{ $PARA_ID }} ${{ $MANAGER_ACCOUNT }} -g ${{ $GENESIS }} -v ${{ $WASM }}
         
