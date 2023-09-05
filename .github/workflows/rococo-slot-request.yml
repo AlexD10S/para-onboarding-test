@@ -27,19 +27,16 @@ jobs:
         with:
           template-path: .github/ISSUE_TEMPLATE/rococo.yaml # optional but recommended
 
-      - run: echo ${{ steps.issue-parser.outputs.issueparser_para_id }} > PARA_ID
-
-      - run: echo ${{ steps.issue-parser.outputs.issueparser_manager_account }} > MANAGER_ACCOUNT
-
-      - run: echo ${{ steps.issue-parser.outputs.issueparser_genesis }} > GENESIS
-
-      - run: echo ${{ steps.issue-parser.outputs.issueparser_wasm }} > WASM
-
       - name: Run CLI App
         id: onboard
         working-directory: cli
         # run: cargo run $PARA_ID
-        run: cargo run $PARA_ID $MANAGER_ACCOUNT -g $GENESIS -v $WASM
+        run: |
+          para_id="${{ steps.issue-parser.outputs.issueparser_para_id }}"
+          manager_account="${{ steps.issue-parser.outputs.issueparser_manager_account }}"
+          genesis="${{ steps.issue-parser.outputs.issueparser_genesis }}"
+          wasm="${{ steps.issue-parser.outputs.issueparser_wasm }}"
+          cargo run $para_id $manager_account -g $genesis -v $wasm
         
         env:
           SUDO_ACCOUNT: ${{ secrets.SUDO_ACCOUNT }}
