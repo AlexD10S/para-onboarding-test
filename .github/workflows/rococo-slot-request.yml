@@ -26,20 +26,22 @@ jobs:
         id: issue-parser
         with:
           template-path: .github/ISSUE_TEMPLATE/rococo.yaml # optional but recommended
+      
+      - run: cat ${HOME}/issue-parser-result.json
 
       - name: Run CLI App
         id: onboard
         working-directory: cli
-        run: echo "$PARA_ID"
+        run: echo $PARA_ID
         env:
-          SUDO_ACCOUNT: ${{ secrets.SUDO_ACCOUNT }}
-          SEED: ${{ secrets.SEED }}
-          FAUCET_ADDRESS: ${{ secrets.FAUCET_ADDRESS }}
-          ROCOCO_URI: ${{ secrets.ROCOCO_URI }}
           PARA_ID: ${{ steps.issue-parser.outputs.issueparser_para_id }}
           MANAGER_ACCOUNT: ${{ steps.issue-parser.outputs.issueparser_manager_account }}
           GENESIS: ${{ steps.issue-parser.outputs.issueparser_genesis }}
           WASM: ${{ steps.issue-parser.outputs.issueparser_wasm }}
+          SUDO_ACCOUNT: ${{ secrets.SUDO_ACCOUNT }}
+          SEED: ${{ secrets.SEED }}
+          FAUCET_ADDRESS: ${{ secrets.FAUCET_ADDRESS }}
+          ROCOCO_URI: ${{ secrets.ROCOCO_URI }}
        
       - name: Close issue
         if: steps.onboard.outcome == 'success'
