@@ -27,7 +27,7 @@ jobs:
         with:
           template-path: .github/ISSUE_TEMPLATE/rococo.yaml # optional but recommended
       
-      - run: cat ${HOME}/issue-parser-result.json
+      # - run: cat ${HOME}/issue-parser-result.json
 
       - name: Run CLI App
         id: onboard
