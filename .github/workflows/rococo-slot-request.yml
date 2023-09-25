@@ -29,10 +29,10 @@ jobs:
       
       - run: cat ${HOME}/issue-parser-result.json
 
-      - run: cat ${steps.issue-parser.outputs.issueparser_paraid}
-      - run: cat ${{ steps.issue-parser.outputs.issueparser_paraid }}
-      - run: cat ${steps.issue-parser.outputs.issueparser_parachain_manager_account}
-      - run: cat ${{ steps.issue-parser.outputs.issueparser_upload_your_genesis_head_genesis_state__do_not_submit_a_compressed_file }}
+      # - run: cat ${steps.issue-parser.outputs.issueparser_paraid}
+      # - run: cat ${{ steps.issue-parser.outputs.issueparser_paraid }}
+      # - run: cat ${steps.issue-parser.outputs.issueparser_parachain_manager_account}
+      # - run: cat ${{ steps.issue-parser.outputs.issueparser_upload_your_genesis_head_genesis_state__do_not_submit_a_compressed_file }}
 
 
       - name: Run CLI App
@@ -47,7 +47,12 @@ jobs:
           SEED: ${{ secrets.SEED }}
           FAUCET_ADDRESS: ${{ secrets.FAUCET_ADDRESS }}
           ROCOCO_URI: ${{ secrets.ROCOCO_URI }}
-        run: cargo run $PARA_ID $MANAGER_ACCOUNT -g $GENESIS -v $WASM
+        # run: cargo run $PARA_ID $MANAGER_ACCOUNT -g $GENESIS -v $WASM
+        run: |
+          echo $PARA_ID
+          echo $MANAGER_ACCOUNT
+          echo $GENESIS
+          echo $WASM
         
        
       - name: Close issue
