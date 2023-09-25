@@ -29,8 +29,9 @@ jobs:
       
       - run: cat ${HOME}/issue-parser-result.json
 
+      - run: cat ${steps.issue-parser.outputs.issueparser_paraid}
       - run: cat ${{ steps.issue-parser.outputs.issueparser_paraid }}
-      - run: cat ${{ steps.issue-parser.outputs.issueparser_parachain_manager_account }}
+      - run: cat ${steps.issue-parser.outputs.issueparser_parachain_manager_account}
       - run: cat ${{ steps.issue-parser.outputs.issueparser_upload_your_genesis_head_genesis_state__do_not_submit_a_compressed_file }}
 
 
